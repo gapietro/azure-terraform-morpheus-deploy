@@ -1,5 +1,21 @@
-variable "client_secret" {
+variable "client_secret" {}
+
+variable "public_key_path" {
+  default = "~/.ssh/id_rsa.pub"
 }
+
+variable "private_key_path" {
+  default = "~/.ssh/id_rsa"
+}
+
+variable "instance_name" {
+  default = "MorpheusVM"
+}
+
+variable "host_name" {
+  default = "Morpheusvm"
+}
+ 
 
 # Configure the Microsoft Azure Provider
 terraform {
@@ -160,7 +176,7 @@ output "tls_private_key" {
 
 # Create virtual machine
 resource "azurerm_linux_virtual_machine" "myterraformvm" {
-    name                  = "morpheusVM"
+    name                  = var.instance_name
     location              = "eastus"
     resource_group_name   = azurerm_resource_group.myterraformgroup.name
     network_interface_ids = [azurerm_network_interface.myterraformnic.id]
@@ -179,13 +195,13 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
         version   = "latest"
     }
 
-    computer_name  = "morpheusvm"
+    computer_name  = var.host_name
     admin_username = "morpheususer"
     disable_password_authentication = true
 
     admin_ssh_key {
         username       = "morpheususer"
-        public_key     = file("~/.ssh/id_rsa.pub")
+        public_key     = file(var.public_key_path)
     }
 
     boot_diagnostics {
@@ -206,7 +222,7 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
        connection {
           type        = "ssh"
           user        = "morpheususer"
-          private_key = file("~/.ssh/id_rsa")
+          private_key = file(var.private_key_path)
           host        = self.public_ip_address
        }
     }
