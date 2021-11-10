@@ -215,11 +215,11 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
 
     provisioner "remote-exec" {
        inline = [ 
-         "<%=cloudConfig.agentInstall%>",
-         "sudo dnf install wget -y",
-         "wget https://downloads.morpheusdata.com/files/morpheus-appliance-5.3.2-1.el8.x86_64.rpm" ,
-         "sudo rpm -i morpheus-appliance-5.3.2-1.el8.x86_64.rpm",
-         "sudo morpheus-ctl reconfigure"
+         "<%=cloudConfig.agentInstall%>"
+#         "sudo dnf install wget -y",
+#         "wget https://downloads.morpheusdata.com/files/morpheus-appliance-5.3.2-1.el8.x86_64.rpm" ,
+#         "sudo rpm -i morpheus-appliance-5.3.2-1.el8.x86_64.rpm",
+#         "sudo morpheus-ctl reconfigure"
        ]
        connection {
           type        = "ssh"
