@@ -30,10 +30,10 @@ terraform {
 provider "azurerm" {
   features {}
 
-  subscription_id             = "ac29218a-8545-4c3a-9a24-5b594020274c"
-  client_id                   = "c83c1d9d-7d5f-4382-97cc-eeb47046ffd1"
+  subscription_id             = ""
+  client_id                   = ""
   client_secret               = var.client_secret
-  tenant_id                   = "b16e2942-acf7-4664-a827-c99d7e81a77d"
+  tenant_id                   = ""
 }
 
 # Create a resource group if it doesn't exist
