@@ -39,19 +39,19 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
         environment = "Morpheus Deployment"
     }
 
-    provisioner "remote-exec" {
-       inline = [ 
-         "<%=cloudConfig.agentInstall%>"
+#    provisioner "remote-exec" {
+#       inline = [ 
+#         "<%=cloudConfig.agentInstall%>"
 #         "sudo dnf install wget -y",
 #         "wget https://downloads.morpheusdata.com/files/morpheus-appliance-5.3.2-1.el8.x86_64.rpm" ,
 #         "sudo rpm -i morpheus-appliance-5.3.2-1.el8.x86_64.rpm",
 #         "sudo morpheus-ctl reconfigure"
-       ]
-       connection {
-          type        = "ssh"
-          user        = "morpheususer"
-          private_key = file(var.private_key_path)
-          host        = self.public_ip_address
-       }
-    }
+#       ]
+#       connection {
+#          type        = "ssh"
+#          user        = "morpheususer"
+#          private_key = file(var.private_key_path)
+#          host        = self.public_ip_address
+#       }
+#    }
 }
